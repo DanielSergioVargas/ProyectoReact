@@ -6,8 +6,10 @@ export const ItemDetail = ({data}) => {
             <div className="detalle">
                 <img className="detalle__img" src={data.imagen} alt="Detalles del ejemplar"/>
                 <div className="detalle__info">
-                    <h1>{data.titulo}</h1>
-                    <h1>{data.autor}</h1>
+                    <p>{data.titulo}</p>
+                    <p>{data.autor}</p>
+                    <p>{data.paginas}</p>
+                    <p>{data.precio}</p>
                 </div>
             </div>
         </div>
