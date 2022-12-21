@@ -13,7 +13,6 @@ export const ItemDetail = ({data}) => {
     const onAdd = (cantidad) => {
         setToCart(true);
         addProduct(data, cantidad);
-        /* console.log(`Compraste ${cantidad} productos`); */
     }
 
     return (

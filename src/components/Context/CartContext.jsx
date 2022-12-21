@@ -6,10 +6,10 @@ const CartContext = React.createContext([]);
 
 export const useCartContext = () => useContext(CartContext);
 
-const CartProvider = (item, newQuantity) => {
+const CartProvider = ({children}) => {
     const [Cart, setCart] = useState([]);
 
-    const addProduct = () => {
+    const addProduct = (item, newQuantity) => {
         const newCart = Cart.filter( prod => prod.id !== item.id);
         newCart.push( { ...item, quantity : newQuantity } );
         setCart(newCart);
@@ -23,7 +23,7 @@ const CartProvider = (item, newQuantity) => {
 
     return (
         <CartContext.Provider value={ {cleanCart, IsInCart, removeProduct, addProduct} }>
-
+            {children}
         </CartContext.Provider>
     );
 }
