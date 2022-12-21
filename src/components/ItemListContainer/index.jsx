@@ -52,10 +52,6 @@ export const ItemListContainer = (cantidad) => {
             getData.then( res => setData(res));
           }
     }, [categoriaId])
-
-/*     const onAdd = () => {
-        console.log(`Compraste ${cantidad} productos`);
-    } */
     
     return (
     <>
