@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../Context/CartContext";
 import ItemCart from "../ItemCart/ItemCart";
 
 export const Cart = () => {
 
-    const {cart, totalPrice} = useContext();
-
-    if (cart.lenght === 0){
+    const {cart, totalPrice} = useCartContext();
+     
+    if (cart.length === 0){
         return(
             <>
             <p>No hay articulos en el carrito</p>

@@ -9,6 +9,8 @@ export const useCartContext = () => useContext(CartContext);
 const CartProvider = ({children}) => {
     const [Cart, setCart] = useState([]);
 
+    console.log("Carrito: ", Cart);
+
     const addProduct = (item, newQuantity) => {
         const newCart = Cart.filter( prod => prod.id !== item.id);
         newCart.push( { ...item, quantity : newQuantity } );
