@@ -2,14 +2,6 @@ import React, { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail";
 import { useParams } from "react-router-dom";
 
-/* const libro = {
-    id: 1,
-    titulo: "Tormenta de Espadas",
-    autor: "George RR Martin",
-    paginas: 1200,
-    precio: 9000,
-    imagen: "https://contentv2.tap-commerce.com/cover/large/9789506442415_1.jpg?id_com=1113",
-}; */
 
 const libros = [
   {
