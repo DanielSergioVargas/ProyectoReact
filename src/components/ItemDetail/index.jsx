@@ -20,10 +20,9 @@ export const ItemDetail = ({data}) => {
             <div className="detalle">
                 <img className="detalle__img" src={data.img} alt="Detalles del ejemplar"/>
                 <div className="detalle__info">
-                    <p>{data.titulo}</p>
-                    <p>{data.autor}</p>
-                    <p>{data.paginas}</p>
-                    <p>{data.precio}</p>
+                    <p>Tiulo: {data.titulo}</p>
+                    <p>Autor: {data.autor}</p>
+                    <p>Precio: {data.precio}</p>
                     {
                         ToCart
                         ?<Link to={"/cart"}>Finalizar Compra</Link>
