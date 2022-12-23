@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { ItemList } from "../ItemList";
 import { useParams } from "react-router-dom";
 
-const libros = [
+/* const libros = [
   {
     id: 1,
     titulo: "Tormenta de Espadas",
@@ -33,35 +34,42 @@ const libros = [
     stock: 10,
     img: "https://contentv2.tap-commerce.com/cover/original/9789506442545_1.jpg?id_com=1165",
   },
-];
+]; */
 
 
-export const ItemListContainer = (cantidad) => {
-    const [data, setData] = useState([]);
+export const ItemListContainer = () => {
+  const [data, setData] = useState([]);
+  const {categoriaId} = useParams();
 
-    const {categoriaId} = useParams();
+  useEffect(() => {
+    const db = getFirestore();
+    const itemCollection = collection(db, "libros");
+    if (categoriaId) {
+      const queryFilter = query(itemCollection, where("categoria", "==", categoriaId));
+      getDocs(queryFilter).then( res => setData( res.docs.map( product => ( { id: product.id, ...product.data() } ) ) ) );
+    }
+    else{
+      getDocs(itemCollection).then( res => setData( res.docs.map( product => ( { id: product.id, ...product.data() } ) ) ) );
 
-    useEffect(() => {
-        const getData = new Promise( resolve => {
-          setTimeout(() => {
-            resolve(libros); 
-          }, 2000);
-          });
+    }
+    
+
+    
         
-          if (categoriaId) {
+ /*           if (categoriaId) {
             getData.then( res => setData(res.filter(ejemplar => ejemplar.categoria === categoriaId)));    
           }
           else{
             getData.then( res => setData(res));
-          }
-    }, [categoriaId])
+          } */
+  }, [categoriaId])
     
-    return (
-    <>
-        <h1>Bienvenidos A Jekyll Books</h1>
-        <ItemList data={data}/>
-    </>
-    );
+  return (
+  <>
+    <h1>Bienvenidos A Jekyll Books</h1>
+    <ItemList data={data}/>
+  </>
+  );
 }
 
 

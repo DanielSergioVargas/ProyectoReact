@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ItemDetail from "../ItemDetail";
 import { useParams } from "react-router-dom";
+import {doc, getDoc, getFirestore} from "firebase/firestore";
 
-
-const libros = [
+/* const libros = [
   {
     id: 1,
     titulo: "Tormenta de Espadas",
@@ -34,7 +34,7 @@ const libros = [
     stock: 10,
     img: "https://contentv2.tap-commerce.com/cover/original/9789506442545_1.jpg?id_com=1165",
   },
-];
+]; */
 
 export const ItemDetailContainer = () => {
 
@@ -42,14 +42,10 @@ export const ItemDetailContainer = () => {
     const { detalleId } = useParams();
 
     useEffect(() => {
-        const getData = new Promise( resolve => {
-          setTimeout(() => {
-            resolve(libros); 
-          }, 2000);
-          });
-
-        getData.then( res => setData(res.find(ejemplar => ejemplar.id === parseInt(detalleId))));
-    }, []);
+      const db = getFirestore();
+      const queryDoc = doc(db, "libros", detalleId);
+      getDoc(queryDoc).then( res => setData( { id: res.id, ...res.data() } ));
+    }, [detalleId]);
 
     return (
         <ItemDetail data={data}/>
